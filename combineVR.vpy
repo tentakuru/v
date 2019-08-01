@@ -52,6 +52,6 @@ for lut in reallynice:
 	#newclip = core.sub.Subtitle(newclip, lut, style="sans-serif,80,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,0,7,10,10,10,1", )
 	finalclip = core.resize.Point(finalclip, format=vs.YUV420P8, matrix_s="709", chromaloc_s="top_left")
 	#clips.append(newclip)'''
-#Do temporal noise for cleaning up artifacts, disable if you want (this process is very slow)
-finalclip = havs.MCTemporalDenoise(finalclip, settings="very high", MVsharp=2)
+#Do temporal denoise for cleaning up artifacts, enable if you want (this process is very slow)
+#finalclip = havs.MCTemporalDenoise(finalclip, settings="very high", MVsharp=2)
 finalclip.set_output()

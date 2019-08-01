@@ -33,10 +33,10 @@ if arg == "-s":
     finalpath = os.getcwd() + "\\" + file
     bitrate = 25
     #Set encoding settings here (I use h264_nvenc for speed)
-    encodingstring =  "-c:v", "h264_nvenc", "-preset", "medium", "-b:v", str(bitrate) + "M", "-bufsize", str(bitrate*2) + "M", "-profile:v", "high", 
+    encodingstring =  ["-c:v", "h264_nvenc", "-preset", "medium", "-b:v", str(bitrate) + "M", "-bufsize", str(bitrate*2) + "M", "-profile:v", "high"]
 
     for i, side in enumerate(sides):
-        command = ["vspipe", "-a", "video=" + finalpath, "-a", "side=" + side, "-a", "subsampling=" + str(subsampling), "--y4m", "C://VSEdit//splitVR.vpy", "-", "|", "ffmpeg.exe", "-i", "pipe:", "-pix_fmt", "yuv420p", encodingstring, "-y", file.split(".")[0] + "_" + side + ".mp4"]
+        command = ["vspipe", "-a", "video=" + finalpath, "-a", "side=" + side, "-a", "subsampling=" + str(subsampling), "--y4m", "C://VSEdit//splitVR.vpy", "-", "|", "ffmpeg.exe", "-i", "pipe:", "-pix_fmt", "yuv420p", *encodingstring, "-y", file.split(".")[0] + "_" + side + ".mp4"]
         subprocess.call(command, shell = True)
 
 elif arg == "-c":
@@ -50,8 +50,8 @@ elif arg == "-c":
     #This bitrate is for discord, for offline use raise it
     bitrate = 12
     #Set encoding settings here (I use h264_nvenc for speed)
-    encodingstring =  "-c:v", "h264_nvenc", "-preset", "medium", "-b:v", str(bitrate) + "M", "-bufsize", str(bitrate*2) + "M", "-profile:v", "high",
-    command = ["vspipe", "-a", "video=" + file, "--y4m", "C://VSEdit//combinevr.vpy", "-", "|", "ffmpeg.exe", "-i", "pipe:", "-pix_fmt", "yuv420p", encodingstring, "-y", file.split(".")[0] + "_" + "combined" + ".mp4"]
+    encodingstring =  ["-c:v", "h264_nvenc", "-preset", "medium", "-b:v", str(bitrate) + "M", "-bufsize", str(bitrate*2) + "M", "-profile:v", "high"]
+    command = ["vspipe", "-a", "video=" + file, "--y4m", "C://VSEdit//combinevr.vpy", "-", "|", "ffmpeg.exe", "-i", "pipe:", "-pix_fmt", "yuv420p", *encodingstring, "-y", file.split(".")[0] + "_" + "combined" + ".mp4"]
     command2 = ["ffmpeg.exe", "-i", file.split(".")[0] + "_" + "combined.mp4", "-i",  file, "-map", "0:v", "-map", "1:a", "-shortest", "-c", "copy", "-y", file.split(".")[0] + "_" + "final" + ".mp4"]
     subprocess.call(command, shell = True)
     subprocess.call(command2, shell = True)
