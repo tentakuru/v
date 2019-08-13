@@ -15,6 +15,9 @@ if side == "l":
 	if mode == 0:
 		clip = core.std.Crop(clip, left=clip.width/2, right=0)
 		clip = core.resize.Bilinear(clip, width=clip.width, height=(clip.width/16)*9+ss)
+		#clip = core.resize.Bilinear(clip, width=clip.width*1.33+ss, height=clip.width)
+		#clip = core.resize.Bilinear(clip, width=clip.width*1.77+ss, height=clip.width)
+		#clip = core.resize.Bilinear(clip, width=clip.width, height=clip.width)
 		#orgclip = clip
 		clip = core.std.Levels(clip, min_in=0, max_in=255, min_out=15, max_out=255, planes=0)
 		clip = core.std.Levels(clip, min_in=0, max_in=255, min_out=3, max_out=255, planes=[1,2])
@@ -32,6 +35,9 @@ elif side == "r":
 	if mode == 0:
 		clip = core.std.Crop(clip, left=0, right=clip.width/2)
 		clip = core.resize.Bilinear(clip, width=clip.width, height=(clip.width/16)*9+ss)
+		#clip = core.resize.Bilinear(clip, width=clip.width*1.33+ss, height=clip.width)
+		#clip = core.resize.Bilinear(clip, width=clip.width*1.77+ss, height=clip.width)
+		#clip = core.resize.Bilinear(clip, width=clip.width, height=clip.width)
 		#orgclip = clip
 		clip = core.std.Levels(clip, min_in=0, max_in=255, min_out=15, max_out=255, planes=0)
 		clip = core.std.Levels(clip, min_in=0, max_in=255, min_out=3, max_out=255, planes=[1,2])
