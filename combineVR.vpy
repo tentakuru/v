@@ -5,7 +5,7 @@ import havsfunc as havs
 
 video = video.decode("utf-8")
 video = video.split(".")[0]
-moviefolder = "C:\\JavPlayer v1.02_win64_Nvidia\\Movie\\"
+moviefolder = "F:\\JavPlayer v1.03_win64_Nvidia\\Movie\\"
 clip1 = moviefolder + video + "_l_000v.mp4"
 clip2 = moviefolder + video + "_r_000v.mp4"
 clip1 = core.ffms2.Source(clip1)
